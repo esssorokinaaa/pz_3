@@ -3,7 +3,7 @@ def levenstein(str_1, str_2):
     if n > m:
         str_1, str_2 = str_2, str_1
         n, m = m, n
-
+    
     current_row = range(n + 1)
     for i in range(1, m + 1):
         previous_row, current_row = current_row, [i] + [0] * n
@@ -12,5 +12,12 @@ def levenstein(str_1, str_2):
             if str_1[j - 1] != str_2[i - 1]:
                 change += 1
             current_row[j] = min(add, delete, change)
+    
+    result = current_row[n]
+    print("Минимальное количество операций:", result)
+    return result
 
-    return current_row[n]
+# Пример использования функции
+str_1 = 'kitten'
+str_2 = 'sitting'
+print(levenstein(str_1, str_2))
